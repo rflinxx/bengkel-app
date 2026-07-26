@@ -13,16 +13,29 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Script Pencegah Kedip Layar (Wajib di Head) -->
+        <script>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    
+    <!-- Tambahan dark:bg-gray-900 agar latar luar halaman login/register ikut gelap -->
+    <body class="font-sans text-gray-900 antialiased bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <!-- Kotak Form Login/Register -->
+            <!-- Tambahan dark:bg-gray-800 dan dark:border-gray-700 -->
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg border border-transparent dark:border-gray-700 transition-colors duration-300">
                 {{ $slot }}
             </div>
         </div>
